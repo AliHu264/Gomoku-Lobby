@@ -1,0 +1,580 @@
+
+/*
+Using css Grid to control the layout of the page
+Guide: https://css-tricks.com/snippets/css/complete-guide-grid/#prop-grid-template-columns-rows
+*/
+
+:root {
+    --headerColor: #264653;
+    --footerColor: #264653;
+    --leftColor: #E76F51;
+    --rightColor: #E76F51;
+    --chatColor: #E9C46A;
+    --buttonColor:#2A9D8F;
+    --buttonHoverColor: #00294e;
+    --textAreaColor: wheat;
+    --backdropColor: #F4A261;
+    --linkHoverColor: #c7c7c7;
+    --currentRoomFont: darkred;
+    --whitePieceColor: white;
+    --blackPieceColor: black;
+    --squareHover: #c4a67b;
+}
+
+/*setting the font of every text in the page*/
+*{
+    font-family: "Gill Sans MT", sans-serif;
+    box-sizing: border-box;
+}
+html, body {
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+}
+
+body{
+    background: var(--backdropColor);
+}
+
+/*For header*/
+.header {
+    grid-area: header;
+    background-color: var(--headerColor);
+    border-radius: 15px;
+    margin: 5px;
+
+    animation: transitionFromTop 0.75s;
+}
+/*The title of the page at the top "Chat Server"*/
+.page-title{
+    padding: 10px;
+    color: var(--leftColor);
+}
+
+
+/*The link to the about page beside the title*/
+.about-link{
+    text-decoration: none;
+    text-align: right;
+    font-size: 100%;
+    color: white;
+    transition-duration: 0.4s; /* Smooth transition on hover */
+    cursor: pointer;
+}
+/*sets what happens when the about link is hovered*/
+.about-link:hover{
+    color: var(--linkHoverColor);
+}
+
+/*For the sidebar where you select a chatroom */
+/*Note: width of sidebar is being set dynamically by widest thing in the side bar. (the create and join button) */
+.rooms {
+    grid-area: sidebar;
+    background-color: var(--leftColor);
+    text-align: center;
+    margin: 10px;
+    border-radius: 15px;
+    animation: transitionFromLeft 0.75s;
+
+    width: auto;
+}
+
+/*formatting the titles of the left and right areas (for rooms list and users list respectively) */
+.roomsTitle,#usersTitle,#playersTitle{
+    margin: 10px;
+    font-size: 15px;
+}
+
+/*the rooms list*/
+.rooms ul {
+    background-color: var(--leftColor);
+    border-radius: 5px;
+    list-style-type: none;
+    padding: 5px;
+    margin: 0 10px 20px;
+
+
+    overflow: auto;
+    /*height: 50vh;*/
+    max-height: 20vh; /*Set to this value so it fits laptop screens  */
+
+    scrollbar-color: wheat transparent;
+}
+.rooms li {
+    text-align: center;
+    margin-left: 0;
+    align-items: center;
+}
+
+.rooms p{
+    color: var(--buttonHoverColor);
+    background-color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 0;
+    border-radius: 5px 5px 0 0 ;
+    padding: 5px 5px 30px;
+}
+
+/*new room button and refresh button have the same formatting*/
+.modeToggle,
+.new-room-btn,
+.refresh-rooms-btn {
+    margin: 5px;
+    background-color: var(--buttonColor);
+    width: 150px;
+    height: 50px;
+    color: white;
+    margin-left: 13px;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 15px;
+    transition-duration: 0.4s; /* Smooth transition on hover */
+    cursor: pointer;
+}
+/*formatting the button to enter the rooms*/
+.rooms li button{
+    margin: 2px;
+    background-color: var(--buttonColor);
+    width: 100px;
+    height: 50px;
+    color: white;
+
+    font-size: 16px;
+
+    padding: 10px;
+    border-radius: 15px;
+    transition-duration: 0.4s; /* Smooth transition on hover */
+    cursor: pointer;
+
+}
+
+#startGameButton{
+    /*make it so that the startGameButton performs the startButtonReady animation constantly*/
+    animation: startButtonReady 1s infinite;
+
+}
+
+/*the on hover animations*/
+.modeToggle:hover,
+.new-room-btn:hover,
+.refresh-rooms-btn:hover,
+#startGameButton:hover{
+    background-color: var(--buttonHoverColor); /* Darker shade on hover */
+}
+
+.rooms li button:hover{
+    background-color: var(--buttonHoverColor); /* Darker shade on hover */
+    font-size: 20px;
+    width: 120px;
+    height: 65px;
+}
+
+/*#startGameButton{*/
+/*    margin: 5px;*/
+/*    background-color: var(--buttonColor);*/
+/*    width: 150px;*/
+/*    height: 50px;*/
+/*    color: white;*/
+/*    margin-left: 13px;*/
+/*    margin-right: 10px;*/
+/*    padding: 10px;*/
+/*    border-radius: 15px;*/
+/*    transition-duration: 0.4s;*/
+/*    cursor: pointer;*/
+
+/*}*/
+
+/*For the main section (ie the chat area where you see messages/can send messages) */
+.main-section {
+    grid-area: main;
+    background-color: var(--chatColor);
+    /*background-color: yellow;*/
+    padding: 10px;
+    border-radius: 10px;
+    margin: auto;
+    align-self: center;
+    width: 40vw;
+
+    animation: transitionFromMiddle 2s;
+}
+.current-room{
+    text-align: center;
+    color: var(--currentRoomFont);
+    margin: 10px;
+}
+.game-board{
+    display: grid;
+    grid-template-columns: repeat(15, max-content);
+    grid-template-rows: repeat(15,max-content);
+    padding-left: 25%;
+    padding-right: 25%;
+    margin: auto;
+    justify-content: center;
+}
+.square{
+    background-color: var(--textAreaColor);
+    height: 2vw;
+    width: 2vw;
+    padding: 0px;
+    margin: 0px;
+    justify-self: stretch;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.square:hover{
+    background-color: var(--squareHover);
+}
+
+.whitePiece{
+    height: 1.5vw;
+    width: 1.5vw;
+    background-color: var(--whitePieceColor);
+    border-radius: 50%;
+    /*margin-left: 3px;*/
+}
+.blackPiece{
+    height: 1.5vw;
+    width: 1.5vw;
+    background-color: var(--blackPieceColor);
+    border-radius: 50%;
+    /*margin-left: 3px;*/
+}
+
+
+
+
+
+/*formatting for the whole chat area*/
+.chat-area{
+
+    padding: 0;
+    margin:0;
+
+    height: 90%;
+    width: 100%;
+    border-radius: 15px;
+    align-items: center;
+}
+#output-line{
+    display: flex;
+    flex-direction: row;
+    height: 86%;
+    max-height: 65vh;  /*This is to stop #log from scrolling and increasing the whole page size */
+    justify-content: space-between;
+
+    align-items: stretch;
+
+}
+#log {
+    flex: 1;
+    float: left;
+    display: block;
+    width: 70%;
+    /*max-height: 95%;*/
+    height: 95%;
+    resize: none;
+    margin: 9px auto;
+
+    /*height: 576px;*/
+
+    overflow-x: auto;
+    overflow-y: scroll;
+    scrollbar-color: var(--leftColor) transparent;
+
+    background: var(--textAreaColor);
+
+    padding: 0;
+    border: 2px solid var(--buttonHoverColor);
+    border-radius: 15px;
+}
+
+
+/*Formatting the message div, which contains the username, timestamp, and the message*/
+.messageDiv {
+    border-bottom: 1px solid #ccc;
+
+    padding: 10px;
+}
+
+.senderDiv {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.usernames{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 6px;
+
+    /*width: auto;*/
+
+}
+.timestamps{
+    font-size: 14px;
+    margin: 2px;
+    margin-left:6px;
+    /*width: auto;*/
+}
+.messages{
+    font-size: 16px;
+    font-weight: normal;
+    margin: 6px;
+
+    /*width: auto;*/
+}
+
+/*formatting for all images in the page, but for now that only concerns the images sent to the chatroom*/
+img {
+    margin: 5px;
+    max-width: 95%;
+    height: auto;
+    border: var(--leftColor);
+    border-radius: 15px;
+}
+
+/*typing indicator*/
+#indicator{
+    display: block;
+    width: 98.7%;
+    height: 20px;
+    resize: none;
+    margin: 9px auto;
+
+    font-size: 14px;
+
+    background: var(--textAreaColor);
+
+    padding: 0;
+    border: 2px solid var(--buttonHoverColor);
+    border-radius: 15px;
+}
+/*making inputline flex so that the input field, the image input, and the send button are side by side*/
+#input-line{
+    display: flex;
+}
+#input {
+    background: var(--textAreaColor);
+
+    display: block;
+    flex-grow: 1;
+    box-sizing: border-box;
+    width: 100%;
+    float: left;
+    margin: 10px auto;
+    margin-left: 3px;
+
+
+    border: 2px solid var(--buttonHoverColor);
+    border-radius: 10px;
+}
+
+#image-input{
+    width: 150px;
+    float: left;
+    display: block;
+    margin: 10px auto;
+    margin-left: 3px;
+    margin-right: 3px;
+    border: 2px solid var(--buttonHoverColor);
+    border-radius: 10px;
+    padding: 10px;
+
+    min-width: 120px;
+
+    background-color: var(--buttonColor);
+    color: white;
+    cursor: pointer;
+}
+::-webkit-file-upload-button {
+    display: none;
+}
+
+#send-button-id{
+    width: 50px;
+    float: left;
+    display: block;
+    margin: 10px auto;
+    margin-right: 3px;
+    border: 2px solid var(--buttonHoverColor);
+    border-radius: 10px;
+
+    background-color: var(--buttonColor);
+    color: white;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+#send-button-id:hover{
+    background-color: var(--buttonHoverColor);
+}
+
+/*For right hand side of page. List of users in the current chat room */
+.users-in-room{
+    background-color: var(--rightColor);
+    text-align: center;
+    margin: 10px;
+    border-radius: 15px;
+    position: relative;
+
+    width: auto;
+
+    animation: transitionFromRight 0.75s;
+
+}
+.users-in-room p{
+    margin: 5px;
+    color: var(--buttonHoverColor);
+    background-color: var(--textAreaColor);
+    border-radius: 5px;
+    display: grid;
+}
+.users-in-room h3{
+    margin: 5px;
+}
+
+#users-list, #players-list{
+    list-style-type: none;
+    marker: none;
+    align-items: center;
+    padding: 0;
+    margin: 15px;
+
+    background: transparent;
+    border: 1px solid black;
+
+    cursor: default;
+    border: var(--headerColor);
+    border-radius: 15px;
+}
+#users-list li, #players-list li{
+    text-align: center;
+
+    margin: 5px;
+
+    background: var(--buttonColor);
+    border: 1px solid black;
+
+    cursor: default;
+    border: var(--headerColor);
+    border-radius: 15px;
+
+}
+
+#status-input{
+    background: var(--textAreaColor);
+
+    display: block;
+    box-sizing: border-box;
+    position: relative;
+    /*bottom: 18px;*/
+
+    align-self: center;
+
+    left: auto;
+    right: auto;
+
+    width: 90%;
+
+    margin: auto;
+
+    /*margin-left: 8px;*/
+    /*margin-right: 8px;*/
+    /*margin-top: auto;*/
+    /*margin-bottom: auto;*/
+
+    border: 2px solid #003C71;
+    border-radius: 10px;
+}
+
+/*For footer*/
+.footer {
+    grid-area: footer;
+    background-color: var(--footerColor);
+    color: white;
+    border-radius: 15px;
+    text-align: center;
+    margin: 5px;
+
+    animation: transitionFromBottom 0.75s;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: max-content 2fr 1fr;
+    grid-template-rows: min-content 1fr min-content;
+    grid-template-areas:
+    "header header header"
+    "sidebar main users-in-room"
+    "footer footer footer";
+    height: 100vh;
+}
+
+/*Animations for all the elements to come into place onload*/
+@keyframes transitionFromLeft {
+    from{
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes transitionFromRight {
+    from{
+        opacity: 0;
+        transform: translateX(10px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes transitionFromTop {
+    from{
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes transitionFromBottom {
+    from{
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes transitionFromMiddle {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes startButtonReady {
+    /*make it so that the start button's text content increases in size then decreases*/
+    0% {
+        font-size: 15px;
+    }
+    50% {
+        font-size: 25px;
+    }
+    100% {
+        font-size: 15px;
+    }
+}
+
+
+
+

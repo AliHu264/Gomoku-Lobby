@@ -1,0 +1,116 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Gomoku</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+<!-- Add your site or application content here -->
+
+<div class="container"><!-- using css grid to control page layout -->
+<!--  The div for the header, contains the title and a link to the about page-->
+  <div class="header">
+    <h1 class="page-title">
+      Gomoku
+      <a href="about.html" class="about-link"> | About</a>
+    </h1>
+  </div>
+
+<!--  This div the rooms list on the left side, contains a list of buttons that increases for every new room -->
+  <div class="rooms">
+    <h3 class = "roomsTitle">List of active game rooms</h3>
+    <ul class="nav">
+    </ul>
+    <hr>
+
+    <!--List of users in current room-->
+    <h3 id = "usersTitle">Users In Room:</h3>
+    <p id="users-list-message" >You are not in a room.</p>
+    <ul id="users-list">
+    </ul>
+
+    <hr>
+
+<!--    <h3 id = "playersTitle">Players:</h3>-->
+<!--    <ul id="players-list">-->
+<!--    </ul>-->
+<!--    <hr>-->
+    
+    <button type="button" onclick="refreshRooms()" class="refresh-rooms-btn">Refresh Room List</button>
+    <br>
+    <button type="button" onclick="newRoom()" class="new-room-btn">Create New Game Room</button>
+    <br>
+    <button type="button" onclick="toggleMode()" class="modeToggle">Dark mode</button>
+    <br>
+    <input title="Status Input" id="status-input" type="text" placeholder="Enter Your Status!"/>
+
+  </div>
+
+<!--  The main section is in the very middle and contains the chat log where all messages appear, and the input field where users will send messages-->
+  <div class="main-section">
+    <h2 id="current-room" class="current-room">Join or create a game room.</h2>
+
+  <!-- ADD GAME BOARD-->
+  <div class="game-board" id="game-board">
+
+  </div>
+    <h2 id="game-status" class="current-room"></h2>
+  </div>
+
+
+<!-- div for the right ride of the page. is going to be the new chat area-->
+  <div class="users-in-room">
+    <div class="chat-area">
+      <div id = "output-line">
+        <div title="Chat Log" id="log"></div>
+      </div>
+      <textarea title="Typing Indicator" id="indicator" readonly></textarea>
+    </div>
+    <!--      input line for sending text or images-->
+    <div id = "input-line">
+      <input title="Chat Input" id="input" type="text" placeholder="Enter messages here!"/>
+      <input title = "Image Input" id = "image-input" type="file" accept="image/png, image/jpeg" placeholder="choose an image">
+      <button type="submit" onclick="sendButton()" id = "send-button-id">send</button>
+    </div>
+  </div>
+
+
+  <div class="footer">
+    <p>Group 13 | CSCI2020U | Winter 2024</p>
+  </div>
+</div>
+
+
+
+
+<script src="js/main.js"></script>
+<audio id="clickSound" src="click-sound.mp3"></audio>
+
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+  window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+  ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
+</script>
+</body>
+
+</html>
+
+

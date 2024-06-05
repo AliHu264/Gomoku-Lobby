@@ -1,0 +1,178 @@
+:root {
+    --headerColor: #264653;
+    --footerColor: #264653;
+    --leftColor: #E76F51;
+    --rightColor: #E76F51;
+    --chatColor: #E9C46A;
+    --buttonColor:#2A9D8F;
+    --buttonHoverColor: #00294e;
+    --textAreaColor: wheat;
+    --backdropColor: #F4A261;
+    --linkHoverColor: #c7c7c7;
+    --currentRoomFont: darkred;
+    --whitePieceColor: white;
+    --blackPieceColor: black;
+}
+
+
+/*For header*/
+.header {
+    grid-area: header;
+    background-color: var(--headerColor);
+    border-radius: 15px;
+    margin: 5px;
+
+    animation: transitionFromTop 0.75s;
+}
+.page-title{
+    margin: 0;
+    padding: 10px;
+    color: var(--leftColor);
+}
+.index-link{
+    text-decoration: none;
+    text-align: right;
+    font-size: 100%;
+    color: white;
+    transition-duration: 0.4s; /* Smooth transition on hover */
+    cursor: pointer;
+}
+.index-link:hover{
+    color: var(--linkHoverColor);
+}
+
+body{
+    background: var(--backdropColor);
+    /*animation: transitionIn 0.75s;*/
+}
+
+/*For main page content */
+.main{
+    background-color: var(--backdropColor);
+    color: var(--backdropColor);
+    width: 100%;
+    text-align: center;
+
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+    grid-template-areas:
+    "blank blank blank"
+    "blank content blank"
+    "blank blank blank";
+}
+
+/*For subgrid in "main" */
+.blank{
+    height: 100%;
+    width: 100%;
+    background-color: var(--backdropColor);
+    border-radius: 15px;
+}
+.content{
+    background-color: var(--leftColor);
+    color: black;
+    border-radius: 15px;
+
+    animation: transitionFromMiddle 2s;
+}
+.team-title{
+    background-color: var(--headerColor);
+    color: white;
+    margin: 10px;
+    margin-left: 35%;
+    margin-right: 35%;
+    border: var(--headerColor) 6px;
+    border-radius: 10px;
+}
+
+/*The listing of our names*/
+ul.list {
+    list-style: none;
+    margin-top: 10%;
+}
+ul.list li {
+    display: inline-block;
+    min-width: 0;
+    background-color: var(--backdropColor);
+    border-radius: 10px;
+    padding: 10px;
+    transition-duration: 0.4s; /* Smooth transition on hover */
+    cursor: pointer;
+}
+ul.list li:hover{
+    background-color: var(--backdropColor);
+    padding: 15px;
+}
+
+ul.git {
+    list-style: square;
+    display: block;
+    padding: 0;
+
+}
+ul.git li {
+    border: 0;
+}
+
+.image{
+    width: 20px;
+    height: 20px
+}
+
+
+
+
+
+
+/*For footer*/
+.footer {
+    grid-area: footer;
+    background-color: var(--footerColor);
+    color: white;
+    border-radius: 15px;
+    text-align: center;
+    margin: 5px;
+
+    animation: transitionFromBottom 0.75s;
+}
+.container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content 1fr min-content;
+    grid-template-areas:
+    "header"
+    "main"
+    "footer";
+    height: 100vh;
+}
+
+/*animations for the header, the footer, and the middle section*/
+@keyframes transitionFromTop {
+    from{
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes transitionFromBottom {
+    from{
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes transitionFromMiddle {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
