@@ -1,6 +1,4 @@
-# Final Project - Gomoku Online Lobby
-Course:
-CSCI 2020U - Software Systems Development and Integration
+Gomoku Online Lobby
 
 ## Table of Contents
 1.[Project Information](#project-information)<br>
@@ -25,7 +23,7 @@ Video of The Application Running:<br>
 https://github.com/OntarioTech-CS-program/w24-csci2020u-final-project-alhadi-hu-ward-juan/assets/114015131/185d08fa-51d3-43bf-94fd-c2b1d5ca6904
 
 <br>
-Just in case the video does not play here, the video file of the screen recording is also provided at 'images/ScreenRecording/finalDemo.mp4'
+The video file of the screen recording is also provided at 'images/ScreenRecording/finalDemo.mp4'
 
 ## How to Run
 
@@ -79,19 +77,17 @@ Before being able to run the application, you need to clone this repository from
     <br><be>
 
 ## Other Resources
-idk if we need this part
-
 https://en.wikipedia.org/wiki/Gomoku
 
 ## Contribution Report
 ### Contributions:
-**All group members contributed relatively equally**
+
 - Ali Hu:
     - implmented the backend game logic to keep track of players and the game board
     - included semaphores to prevent race condition when accessing game rooms
 - Alreda Alhadi:
-    - 
+    - JS/CSS: worked on the client-side of the game, and some minor visual adjustments
 - Alan Ward:
     - HTML/CSS/JS design and audio
 - Joshua Juan:
-    - 
+    - HTML/CSS/Backend and frontend functionality
